@@ -1,19 +1,20 @@
-
+import random
+numero_seleccionado = random.randrange(1,11)
+print(numero_seleccionado)
 a = 1 
 while (a):
-  print('''
-  -- menu --
-  1) saludar
-  2) despedirse
-  0) sali  
-  ''')
+  print('Vamos a jugar a adivinar el numero del 1 al 10: ')
   try:
-    a = int(input('ingresa el dato: '))
-    if a == 1:
-      print('hola, como estas?')
-    elif a == 2:
-      print('chao! que tengas un buen dia')
-    else: 
-      print('ingresa una opcion valida')
+    numero_ingresado = int(input('ingresa el dato: '))
+    if numero_seleccionado == numero_ingresado:
+      print('adivinaste !! ')
+
+      valor_ingresado = int(input('jugar de nuevo 1, salir 0'))
+      if valor_ingresado == 0:
+        a = None 
+        
+      numero_seleccionado = random.randrange(1,11)
+
   except:
     pass
+
