@@ -38,6 +38,10 @@ class Estudiante():
     nombre = ''
     lista_materias = []
     
+    def __init__(self, id, nombre, lista_materias):
+        self.id = id
+        self.nombre = nombre
+        self.lista_materias = lista_materias
 
 class Materia():
     id = ''
@@ -48,18 +52,74 @@ class Nota():
     id_materia = ''
     valor = ''
 
+def populate_data():
+    '''
+    Popular data de la informacion que vamos a trabajar
+    return dict {
+        'profesores': [<P. sebastian>, <P. luis>, <P. daniel>, ..],
+        'estudiantes': [<E. wilson>, <E. walter>, .. ],
+    }
+    '''
 
-profesor_1 = Profesor(
-    id = 1,
-    nombre = 'sebastian henao', 
-    lista_materias = ['programacion', 'python']
-)
+    profesores = []
+    estudiantes = []
+    materias = []
+    notas = []
+    
+    # --- POPUlAMOS PROFESORES ---
+    profesor_1 = Profesor(
+        id = 1,
+        nombre = 'sebastian henao', 
+        lista_materias = ['programacion', 'python']
+    )
 
-profesor_2 = Profesor(
-    id = 2,
-    nombre = 'luis lopez', 
-    lista_materias = ['programacion', 'javascript']
-)
+    profesor_2 = Profesor(
+        id = 2,
+        nombre = 'luis lopez', 
+        lista_materias = ['programacion', 'javascript']
+    )
 
-print(profesor_1.nombre)
-print(profesor_2.nombre)
+    profesor_3 = Profesor(
+        id = 2,
+        nombre = 'daniel vargas', 
+        lista_materias = ['git', 'html', 'css', 'js']
+    )
+
+    profesores.append(profesor_1)
+    profesores.append(profesor_2)
+    profesores.append(profesor_3)
+
+
+    # --- POPUlAMOS ESTUDIANTE ---
+    estudiante_1 = Estudiante(
+        id = 1,
+        nombre = 'wilson sanmiguel', 
+        lista_materias = ['git', 'python']
+    )
+
+    estudiante_2 = Estudiante(
+        id = 2,
+        nombre = 'walter giovanny', 
+        lista_materias = ['programacion', 'html' 'css', 'js']
+    )
+
+
+    estudiantes.append(estudiante_1)
+    estudiantes.append(estudiante_2)
+
+    return {
+        'profesores': profesores,
+        'estudiantes': estudiantes,
+        'materias': materias,
+        'notas': notas,
+    }
+
+
+# Popular data 
+data = populate_data()
+
+# Imprimir valores 
+for key, value in data.items():
+    print(key, value)
+    for val in value:
+        print(val.nombre)
