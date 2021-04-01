@@ -21,3 +21,25 @@ estas entidades deben ser implementadas mediante objetos. el programa debe permi
 6) {OPCIONAL} - los horarios son definidos de maximo 6 horas diarias, un estudiante no puede estar en dos materias con el mismo horario, un profesor no puede dictar dos materias que sean vistas el mismo
 
 '''
+
+
+class Profesor():
+    id = ''
+    nombre = ''
+    lista_materias = []
+    
+
+class Estudiante():
+    id = ''
+    nombre = ''
+    lista_materias = []
+    
+
+class Materia():
+    id = ''
+    nombre = ''
+    horario = ''
+
+class Nota():
+    id_materia = ''
+    valor = ''
