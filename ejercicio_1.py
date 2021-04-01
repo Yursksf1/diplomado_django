@@ -126,8 +126,11 @@ while (a):
         
     if a == '9':
         # Imprimir materias 
+        print('-- materias --')
         for materia in data.get('materias'):
             print(materia.nombre)
+        print('')
+        print('')
 
     
 print('-- se acabo de ejecutar todo el codigo--')
