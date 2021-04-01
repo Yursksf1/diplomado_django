@@ -48,6 +48,10 @@ class Materia():
     nombre = ''
     horario = ''
 
+    def __init__(self, id, nombre):
+        self.id = id
+        self.nombre = nombre
+        
 class Nota():
     id_materia = ''
     valor = ''
@@ -123,3 +127,36 @@ for key, value in data.items():
     print(key, value)
     for val in value:
         print(val.nombre)
+
+print('---- MENU --- ')
+
+a = 1 
+index_materia = 1
+
+while (a):
+    print('selecciona una opcion: ')
+
+    print('''
+    1) Agregar Materia
+    9) Imprimir Materia
+    0) Salir
+
+    ''')
+
+    a = input('ingresa el dato: ')
+    if a == '1':
+        # Agregar la materia
+        nombre = input('ingresa el nombre de la materia: ')
+        materia = Materia(index_materia, nombre)
+        data.get('materias').append(materia)
+
+        index_materia = index_materia + 1
+
+        
+    if a == '9':
+        # Imprimir materias 
+        for materia in data.get('materias'):
+            print(materia.nombre)
+
+    
+print('-- se acabo de ejecutar todo el codigo--')
