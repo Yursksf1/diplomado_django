@@ -82,6 +82,33 @@ def populate_data():
     estudiantes.append(estudiante_1)
     estudiantes.append(estudiante_2)
 
+    # --- POPUlAMOS MATERIAS ---
+    materia_1 = Materia(
+        id=1,
+        nombre='Programacion'
+    )
+
+    materia_2 = Materia(
+        id=2,
+        nombre='Python'
+    )
+
+    materia_3 = Materia(
+        id=3,
+        nombre='Html'
+    )
+
+    materia_4 = Materia(
+        id=4,
+        nombre='Web'
+    )
+
+
+    materias.append(materia_1)
+    materias.append(materia_2)
+    materias.append(materia_3)
+    materias.append(materia_4)
+
     return {
         'profesores': profesores,
         'estudiantes': estudiantes,
@@ -95,42 +122,42 @@ data = populate_data()
 
 # Imprimir valores 
 for key, value in data.items():
-    print(key, value)
+    print('\n lista de: {}'.format(key))
     for val in value:
         print(val.nombre)
 
-print('---- MENU --- ')
+# print('---- MENU --- ')
 
-a = 1 
-index_materia = 1
+# a = 1 
+# index_materia = 1
 
-while (a):
-    print('selecciona una opcion: ')
+# while (a):
+#     print('selecciona una opcion: ')
 
-    print('''
-    1) Agregar Materia
-    9) Imprimir Materia
-    0) Salir
+#     print('''
+#     1) Agregar Materia
+#     9) Imprimir Materia
+#     0) Salir
 
-    ''')
+#     ''')
 
-    a = input('ingresa el dato: ')
-    if a == '1':
-        # Agregar la materia
-        nombre = input('ingresa el nombre de la materia: ')
-        materia = Materia(index_materia, nombre)
-        data.get('materias').append(materia)
+#     a = input('ingresa el dato: ')
+#     if a == '1':
+#         # Agregar la materia
+#         nombre = input('ingresa el nombre de la materia: ')
+#         materia = Materia(index_materia, nombre)
+#         data.get('materias').append(materia)
 
-        index_materia = index_materia + 1
+#         index_materia = index_materia + 1
 
         
-    if a == '9':
-        # Imprimir materias 
-        print('-- materias --')
-        for materia in data.get('materias'):
-            print(materia.nombre)
-        print('')
-        print('')
+#     if a == '9':
+#         # Imprimir materias 
+#         print('-- materias --')
+#         for materia in data.get('materias'):
+#             print(materia.nombre)
+#         print('')
+#         print('')
 
     
 print('-- se acabo de ejecutar todo el codigo--')
