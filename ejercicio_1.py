@@ -28,6 +28,10 @@ class Profesor():
     nombre = ''
     lista_materias = []
     
+    def __init__(self, id, nombre, lista_materias):
+        self.id = id
+        self.nombre = nombre
+        self.lista_materias = lista_materias
 
 class Estudiante():
     id = ''
@@ -43,3 +47,19 @@ class Materia():
 class Nota():
     id_materia = ''
     valor = ''
+
+
+profesor_1 = Profesor(
+    id = 1,
+    nombre = 'sebastian henao', 
+    lista_materias = ['programacion', 'python']
+)
+
+profesor_2 = Profesor(
+    id = 2,
+    nombre = 'luis lopez', 
+    lista_materias = ['programacion', 'javascript']
+)
+
+print(profesor_1.nombre)
+print(profesor_2.nombre)
