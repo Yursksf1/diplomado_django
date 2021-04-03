@@ -22,7 +22,7 @@ estas entidades deben ser implementadas mediante objetos. el programa debe permi
 
 '''
 
-from objetos.nota import Nota
+from objetos.nota import Nota, Matricula
 from objetos.materia import Materia
 from objetos.estudiante import Estudiante
 from objetos.profesor import Profesor
@@ -40,24 +40,22 @@ def populate_data():
     estudiantes = []
     materias = []
     notas = []
-    
+    matriculas = []
+
     # --- POPUlAMOS PROFESORES ---
     profesor_1 = Profesor(
         id = 1,
         nombre = 'sebastian henao', 
-        lista_materias = ['programacion', 'python']
     )
 
     profesor_2 = Profesor(
         id = 2,
         nombre = 'luis lopez', 
-        lista_materias = ['programacion', 'javascript']
     )
 
     profesor_3 = Profesor(
         id = 2,
         nombre = 'daniel vargas', 
-        lista_materias = ['git', 'html', 'css', 'js']
     )
 
     profesores.append(profesor_1)
@@ -69,13 +67,11 @@ def populate_data():
     estudiante_1 = Estudiante(
         id = 1,
         nombre = 'wilson sanmiguel', 
-        lista_materias = ['git', 'python']
     )
 
     estudiante_2 = Estudiante(
         id = 2,
         nombre = 'walter giovanny', 
-        lista_materias = ['programacion', 'html' 'css', 'js']
     )
 
 
@@ -103,17 +99,79 @@ def populate_data():
         nombre='Web'
     )
 
-
     materias.append(materia_1)
     materias.append(materia_2)
     materias.append(materia_3)
     materias.append(materia_4)
+
+    matricula_1 = Matricula(
+        estudiante_id=estudiante_1.id
+        materia_id=materia_1.id
+        profesor_id=profesor_1.id
+    )
+    
+    matricula_2 = Matricula(
+        estudiante_id=estudiante_1.id
+        materia_id=materia_2.id
+        profesor_id=profesor_1.id
+    )
+
+    matricula_3 = Matricula(
+        estudiante_id=estudiante_1.id
+        materia_id=materia_4.id
+        profesor_id=profesor_2.id
+    )
+    
+    matricula_4 = Matricula(
+        estudiante_id=estudiante_2.id
+        materia_id=materia_1.id
+        profesor_id=profesor_1.id
+    )
+    
+    matricula_5 = Matricula(
+        estudiante_id=estudiante_2.id
+        materia_id=materia_3.id
+        profesor_id=profesor_3.id
+    )
+
+    matricula_6 = Matricula(
+        estudiante_id=estudiante_2.id
+        materia_id=materia_4.id
+        profesor_id=profesor_2.id
+    )
+    
+    matriculas.append(matricula_1)
+    matriculas.append(matricula_2)
+    matriculas.append(matricula_3)
+    matriculas.append(matricula_4)
+    matriculas.append(matricula_5)
+    matriculas.append(matricula_6)
+
+    nota_1 = Nota(
+        matricula_id=matricula_1,
+        valor=5
+    )
+
+    nota_2 = Nota(
+        matricula_id=matricula_1,
+        valor=4
+    )
+
+    nota_3 = Nota(
+        matricula_id=matricula_1,
+        valor=3
+    )
+
+    notas.append(nota_1)
+    notas.append(nota_2)
+    notas.append(nota_3)
 
     return {
         'profesores': profesores,
         'estudiantes': estudiantes,
         'materias': materias,
         'notas': notas,
+        'matriculas': matriculas
     }
 
 
