@@ -105,36 +105,42 @@ def populate_data():
     materias.append(materia_4)
 
     matricula_1 = Matricula(
+        id=1,
         estudiante_id=estudiante_1.id,
         materia_id=materia_1.id,
         profesor_id=profesor_1.id,
     )
     
     matricula_2 = Matricula(
+        id=2,
         estudiante_id=estudiante_1.id,
         materia_id=materia_2.id,
         profesor_id=profesor_1.id,
     )
 
     matricula_3 = Matricula(
+        id=3,
         estudiante_id=estudiante_1.id,
         materia_id=materia_4.id,
         profesor_id=profesor_2.id,
     )
     
     matricula_4 = Matricula(
+        id=4,
         estudiante_id=estudiante_2.id,
         materia_id=materia_1.id,
         profesor_id=profesor_1.id,
     )
     
     matricula_5 = Matricula(
+        id=5,
         estudiante_id=estudiante_2.id,
         materia_id=materia_3.id,
         profesor_id=profesor_3.id,
     )
 
     matricula_6 = Matricula(
+        id=6,
         estudiante_id=estudiante_2.id,
         materia_id=materia_4.id,
         profesor_id=profesor_2.id,
@@ -148,17 +154,17 @@ def populate_data():
     matriculas.append(matricula_6)
 
     nota_1 = Nota(
-        matricula_id=matricula_1,
+        matricula_id=matricula_1.id,
         valor=5
     )
 
     nota_2 = Nota(
-        matricula_id=matricula_1,
+        matricula_id=matricula_1.id,
         valor=4
     )
 
     nota_3 = Nota(
-        matricula_id=matricula_1,
+        matricula_id=matricula_1.id,
         valor=3
     )
 
@@ -184,6 +190,19 @@ for key, value in data.items():
     if key in ['profesores', 'estudiantes', 'materias']:
         for val in value:
             print(val.nombre)
+
+
+matriculas = data.get('matriculas')
+notas = data.get('notas')
+estudiantes = data.get('estudiantes')
+materias = data.get('materias')
+
+for matricula in matriculas:
+    print('estudiante: ', matricula.get_estudiante(estudiantes).nombre)
+    print('materia: ', matricula.get_mateia(materias).nombre)
+    print('promedio: ', matricula.get_promedio(notas))
+    print('')
+
 
 # print('---- MENU --- ')
 
