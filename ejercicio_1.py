@@ -105,39 +105,39 @@ def populate_data():
     materias.append(materia_4)
 
     matricula_1 = Matricula(
-        estudiante_id=estudiante_1.id
-        materia_id=materia_1.id
-        profesor_id=profesor_1.id
+        estudiante_id=estudiante_1.id,
+        materia_id=materia_1.id,
+        profesor_id=profesor_1.id,
     )
     
     matricula_2 = Matricula(
-        estudiante_id=estudiante_1.id
-        materia_id=materia_2.id
-        profesor_id=profesor_1.id
+        estudiante_id=estudiante_1.id,
+        materia_id=materia_2.id,
+        profesor_id=profesor_1.id,
     )
 
     matricula_3 = Matricula(
-        estudiante_id=estudiante_1.id
-        materia_id=materia_4.id
-        profesor_id=profesor_2.id
+        estudiante_id=estudiante_1.id,
+        materia_id=materia_4.id,
+        profesor_id=profesor_2.id,
     )
     
     matricula_4 = Matricula(
-        estudiante_id=estudiante_2.id
-        materia_id=materia_1.id
-        profesor_id=profesor_1.id
+        estudiante_id=estudiante_2.id,
+        materia_id=materia_1.id,
+        profesor_id=profesor_1.id,
     )
     
     matricula_5 = Matricula(
-        estudiante_id=estudiante_2.id
-        materia_id=materia_3.id
-        profesor_id=profesor_3.id
+        estudiante_id=estudiante_2.id,
+        materia_id=materia_3.id,
+        profesor_id=profesor_3.id,
     )
 
     matricula_6 = Matricula(
-        estudiante_id=estudiante_2.id
-        materia_id=materia_4.id
-        profesor_id=profesor_2.id
+        estudiante_id=estudiante_2.id,
+        materia_id=materia_4.id,
+        profesor_id=profesor_2.id,
     )
     
     matriculas.append(matricula_1)
@@ -181,8 +181,9 @@ data = populate_data()
 # Imprimir valores 
 for key, value in data.items():
     print('\n lista de: {}'.format(key))
-    for val in value:
-        print(val.nombre)
+    if key in ['profesores', 'estudiantes', 'materias']:
+        for val in value:
+            print(val.nombre)
 
 # print('---- MENU --- ')
 

@@ -9,7 +9,7 @@ class Nota():
 
 class Matricula():
 
-    def __init__(self, estudiante_id, materia_id, profesor_id)
+    def __init__(self, estudiante_id, materia_id, profesor_id):
         self.estudiante_id = estudiante_id
         self.materia_id = materia_id
         self.profesor_id = profesor_id
