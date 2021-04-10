@@ -21,7 +21,17 @@ def students(request):
     response = {}
     for student in students:
         print(student.first_name, student.last_name)
-        response[student.id] = '{} {}'.format(student.first_name, student.last_name)
+        response[student.id] = {
+            'full name': '{} {}'.format(student.first_name, student.last_name),
+        }
+        enrollments = student.enrollment_set.all()
+        student_enrollment = []
+
+        for enrollment in enrollments:
+            student_enrollment.append(enrollment.subject.name)
+
+        response[student.id]['enrollments'] = student_enrollment
+
     print('response', response)
 
     return JsonResponse(response)
