@@ -31,6 +31,8 @@ def students(request):
             student_enrollment.append(enrollment.subject.name)
 
         response[student.id]['enrollments'] = student_enrollment
+        # TODO: add promedio por materia y por cada estudiante
+
 
     print('response', response)
 
