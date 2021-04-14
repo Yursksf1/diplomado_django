@@ -1,3 +1,4 @@
 *.db
 *.sqbpro
+.DS_Store
 /myenv

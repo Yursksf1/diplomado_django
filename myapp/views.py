@@ -28,12 +28,20 @@ def students(request):
         student_enrollment = []
 
         for enrollment in enrollments:
-            student_enrollment.append(enrollment.subject.name)
+
+            average_enrollment = 0
+            notes = enrollment.note_set.all()
+            for note in notes:
+                average_enrollment = average_enrollment + note.value
+
+            average_enrollment = average_enrollment / len(notes)
+            student_enrollment.append(
+                {
+                    'name': enrollment.subject.name,
+                    'average': average_enrollment
+                }
+            )
 
         response[student.id]['enrollments'] = student_enrollment
-        # TODO: add promedio por materia y por cada estudiante
-
-
-    print('response', response)
 
     return JsonResponse(response)
