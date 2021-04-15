@@ -48,5 +48,10 @@ def students(request):
 
 
 def index(request):
-    print('hola')
-    return render(request, 'home.html')
+    students = Student.objects.all()
+    context = {
+        # 'message': 'hola mundo',
+        'students': students
+    }
+
+    return render(request, 'home.html', context)
