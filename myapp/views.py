@@ -17,6 +17,11 @@ def subject(request):
 
 
 def students(request):
+    response = get_students()
+    return JsonResponse(response)
+
+
+def get_students():
     students = Student.objects.all()
     response = {}
     for student in students:
@@ -31,10 +36,11 @@ def students(request):
 
             average_enrollment = 0
             notes = enrollment.note_set.all()
-            for note in notes:
-                average_enrollment = average_enrollment + note.value
+            if notes:
+                for note in notes:
+                    average_enrollment = average_enrollment + note.value
 
-            average_enrollment = average_enrollment / len(notes)
+                average_enrollment = average_enrollment / len(notes)
             student_enrollment.append(
                 {
                     'name': enrollment.subject.name,
@@ -43,14 +49,13 @@ def students(request):
             )
 
         response[student.id]['enrollments'] = student_enrollment
-
-    return JsonResponse(response)
+    return response
 
 
 def index(request):
-    students = Student.objects.all()
+    students = get_students()
     context = {
-        # 'message': 'hola mundo',
+        'message': 'hola mundo',
         'students': students
     }
 
