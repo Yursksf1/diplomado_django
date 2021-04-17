@@ -60,3 +60,6 @@ def index(request):
     }
 
     return render(request, 'home.html', context)
+
+def index_2(request):
+    return render(request, 'home_2.html')

@@ -1,14 +1,14 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+
+students    
+{% endblock %} 
+
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-
-
-    <h2>HTML Table</h2>
+{% block content %}
 
     <table>
       <tr>
@@ -48,7 +48,4 @@
       </tr>
     </table>
     
-
-
-</body>
-</html>
+{% endblock %}
