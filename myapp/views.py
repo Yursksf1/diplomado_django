@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import Subject, Student, Teacher
+from .models import Subject, Student, Teacher, Group
 
 # Create your views here.
 
@@ -98,3 +98,25 @@ def get_person(request, person, id):
     }
     return render(request, 'person_detail.html', context)
 
+
+def list_group(request):
+    groups = Group.objects.all()
+    context = {
+        'title': 'Groups',
+        'groups': groups
+    }
+
+    return render(request, 'list_groups.html', context)
+
+
+def get_group(request, id):
+
+    group = Group.objects.filter(id=id).first()
+    students = group.student_set.all()
+    context = {
+        'title': group.title,
+        'group': group,
+        'students': students
+    }
+
+    return render(request, 'detail_group.html', context)

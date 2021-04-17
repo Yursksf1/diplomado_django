@@ -10,4 +10,6 @@ urlpatterns = [
 
     path('example/<person>/', views.list_person),
     path('example/<person>/<id>', views.get_person),
+    path('groups', views.list_group),
+    path('group/<id>', views.get_group, name='get_group'),
 ]

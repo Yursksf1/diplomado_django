@@ -2,15 +2,28 @@ from django.db import models
 
 # Create your models here.
 
+
+class Group(models.Model):
+    title = models.CharField(max_length=30)
+    description = models.TextField(default='')
+
+    class Meta:
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
+
+
 class Student(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-  
-    
+    group = models.ManyToManyField(Group)
+
+
 class Teacher(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    
+
 
 class Subject(models.Model):
     name = models.CharField(max_length=30)
@@ -30,13 +43,9 @@ class Note(models.Model):
 
 
 
-
-
-
-
 # class Estudiante(Person):
 #     promedio = models.DecimalField(max_digits=5, decimal_places=2)
-    
+
 # class Profesor(Person):
 #     pass
 
