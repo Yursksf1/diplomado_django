@@ -120,3 +120,15 @@ def get_group(request, id):
     }
 
     return render(request, 'detail_group.html', context)
+
+
+def get_student(request, id):
+    student = Student.objects.filter(id=id).first()
+    groups = student.group.all()
+    context = {
+        'title': 'student',
+        'groups': groups,
+        'student': student
+    }
+
+    return render(request, 'detail_student.html', context)
