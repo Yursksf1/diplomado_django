@@ -84,3 +84,17 @@ def list_person(request, person):
     }
     return render(request, 'list_person.html', context)
 
+
+def get_person(request, person, id):
+    models = Student
+    if person == 'teacher':
+        models = Teacher
+
+    persons = models.objects
+    person = persons.filter(id=id).first()
+    context = {
+        'title': person,
+        'person': person
+    }
+    return render(request, 'person_detail.html', context)
+
