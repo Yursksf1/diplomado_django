@@ -6,13 +6,14 @@
 
 
 {% block title %}
-
-teachers    
+{{ title }}
 {% endblock %}
 
 
 {% block content %}
 
-Ejemplo de extend
-    
+{% for studen in students %}
+    <p> {{ studen.first_name }}</p>
+{% endfor %}
+
 {% endblock %}

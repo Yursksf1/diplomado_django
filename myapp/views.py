@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .models import Subject, Student
+from .models import Subject, Student, Teacher
 
 # Create your views here.
 
@@ -52,14 +52,21 @@ def get_students():
     return response
 
 
-def index(request):
-    students = get_students()
+def list_students(request):
+    students = Student.objects.all()
     context = {
-        'message': 'hola mundo',
+        'title': 'Estudiantes',
         'students': students
     }
 
-    return render(request, 'home.html', context)
+    return render(request, 'list_students.html', context)
 
-def index_2(request):
-    return render(request, 'home_2.html')
+
+def list_teachers(request):
+    teachers = Teacher.objects.all()
+    context = {
+        'title': 'Profesores',
+        'teachers': teachers
+    }
+
+    return render(request, 'list_teachers.html', context)
