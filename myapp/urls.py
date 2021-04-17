@@ -1,10 +1,12 @@
 from django.contrib import admin
 from django.urls import path
-from .views import list_teachers, list_students, subject, students
+from . import views
 
 urlpatterns = [
-    path('list_students', list_students),
-    path('list_teachers', list_teachers),
-    path('subject', subject),
-    path('students', students),
+    path('list_students', views.list_students),
+    path('list_teachers', views.list_teachers),
+    path('subject', views.subject),
+    path('students', views.students),
+    path('example/<person>/', views.list_person),
+
 ]

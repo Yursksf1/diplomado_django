@@ -70,3 +70,17 @@ def list_teachers(request):
     }
 
     return render(request, 'list_teachers.html', context)
+
+
+def list_person(request, person):
+    models = Student
+    if person == 'teacher':
+        models = Teacher
+
+    persons = models.objects.all()
+    context = {
+        'title': person,
+        'persons': persons
+    }
+    return render(request, 'list_person.html', context)
+
