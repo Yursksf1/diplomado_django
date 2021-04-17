@@ -3,17 +3,11 @@
 
 {% load static %}
 
-
-
 {% block title %}
 {{ title }}
 {% endblock %}
 
 
 {% block content %}
-
-{% for studen in students %}
-    <p> {{ studen.first_name }}</p>
-{% endfor %}
-
+    {% include 'iter_student.html' %}
 {% endblock %}

@@ -9,20 +9,7 @@
 
 {% block content %}
 
-    <table>
-      <tr>
-        <th>Nombre</th>
-        <th>Appellido</th>
-      </tr>
+{% include 'iter_teacher.html' %}
 
-        {% for teacher in teachers %}
-            <tr>
-              <td>{{ teacher.first_name }}</td>
-              <td>{{ teacher.last_name }}</td>
-            </tr>
-        {% endfor %}
-
-
-    </table>
 
 {% endblock %}

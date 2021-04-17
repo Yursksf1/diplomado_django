@@ -1,0 +1,14 @@
+
+<table>
+    <tr>
+      <th>Nombre</th>
+      <th>Appellido</th>
+    </tr>
+
+      {% for student in students %}
+          <tr>
+            <td>{{ student.first_name }}</td>
+            <td>{{ student.last_name }}</td>
+          </tr>
+      {% endfor %}
+</table>
