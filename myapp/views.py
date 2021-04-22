@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .models import Subject, Student, Teacher, Group
+from django.shortcuts import redirect
 
 # Create your views here.
 
@@ -145,5 +146,6 @@ def new_group(request):
         title = request.POST.get('title')
 
         Group(title=title, description=description).save()
+        return redirect('groups')
 
     return render(request, 'new_group.html')

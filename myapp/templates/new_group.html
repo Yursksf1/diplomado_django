@@ -10,6 +10,7 @@
 
 {% block content %}
 
+<div class="jumbotron">
 <form action="{% url 'new_group' %}" method="POST">
       {% csrf_token %}
       <div class="form-group">
@@ -26,5 +27,6 @@
 </form>
 
 
+      </div>
 
 {% endblock %}
