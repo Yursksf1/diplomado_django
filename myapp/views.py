@@ -8,7 +8,7 @@ from .models import Subject, Student, Teacher, Group
 def home(request):
     context = {}
     print('estoy llamando al index')
-    return render(request, 'home.html', context)
+    return render(request, 'new_group.html', context)
 
 def subject(request):
     subjects = Subject.objects.all()
@@ -137,3 +137,13 @@ def get_student(request, id):
     }
 
     return render(request, 'detail_student.html', context)
+
+
+def new_group(request):
+    if request.method == 'POST':
+        description = request.POST.get('description')
+        title = request.POST.get('title')
+
+        Group(title=title, description=description).save()
+
+    return render(request, 'new_group.html')

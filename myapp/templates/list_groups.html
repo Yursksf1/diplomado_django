@@ -9,7 +9,8 @@
 
 
 {% block content %}
-
+<div class="jumbotron">
+  <a class="btn btn-primary btn-lg" href="{% url 'new_group' %}" role="button">Add Group</a>
           {% for group in groups %}
                 <h1>
                     <a href="{% url 'get_group' group.id %}">
@@ -22,6 +23,6 @@
                 </p>
 
           {% endfor %}
-
+</div>
 
 {% endblock %}
