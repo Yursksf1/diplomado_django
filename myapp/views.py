@@ -5,6 +5,11 @@ from .models import Subject, Student, Teacher, Group
 # Create your views here.
 
 
+def home(request):
+    context = {}
+    print('estoy llamando al index')
+    return render(request, 'home.html', context)
+
 def subject(request):
     subjects = Subject.objects.all()
     response = ''
