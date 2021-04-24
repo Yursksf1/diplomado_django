@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 
 from .models import Subject, Student, Teacher, Group
-from .forms import GroupForm, StudenFrom
+from .forms import GroupForm, StudenFrom, TeacherFrom
 # Create your views here.
 
 
@@ -142,7 +142,33 @@ def teachers(request):
         'teachers': teachers
     }
 
-    return render(request, 'list_teachers.html', context)
+    return render(request, 'teacher/list_teachers.html', context)
+
+def get_teacher(request, id):
+    teacher = Teacher.objects.filter(id=id).first()
+    context = {
+        'title': 'teacher',
+        'teacher': teacher
+    }
+
+    return render(request, 'teacher/detail_teacher.html', context)
+
+def new_teacher(request):
+    form = TeacherFrom()
+    if request.method == 'POST':
+        form = TeacherFrom(request.POST)
+
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+
+            teacher = Teacher(first_name=first_name, last_name=last_name)
+            teacher.save()
+
+
+            return redirect('teachers')
+
+    return render(request, 'teacher/new_teacher.html', {'form': form})
 
 
 def list_person(request, person):

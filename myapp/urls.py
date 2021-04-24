@@ -17,8 +17,8 @@ urlpatterns = [
     path('group/<id>',      views.get_group,        name='get_group'),
 
     path('teachers',        views.teachers,         name='teachers'),
-    # path('teacher/new', views.new_student, name='new_student'),
-    # path('teacher/<id>', views.get_student, name='get_student'),
+    path('teacher/new',     views.new_teacher,      name='new_teacher'),
+    path('teacher/<id>',    views.get_teacher,      name='get_teacher'),
 
 
     path('example/<person>/', views.list_person),

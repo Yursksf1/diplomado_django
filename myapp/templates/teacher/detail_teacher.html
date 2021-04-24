@@ -1,15 +1,17 @@
 
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
 {{ title }}
 {% endblock %}
 
-{% load static %}
 
 {% block content %}
 
-{% include 'iter_teacher.html' %}
-
+    <h1>
+        {{ teacher.first_name }}  {{ teacher.last_name }}
+    </h1>
 
 {% endblock %}
