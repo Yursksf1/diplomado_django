@@ -6,6 +6,10 @@ class GroupForm(forms.Form):
 
 
 class StudenFrom(forms.Form):
+    def __init__(self, *args, group_choices=(), **kwargs):
+        super(StudenFrom, self).__init__(*args, **kwargs)
+        self.fields['group'].choices = group_choices
+    
     first_name = forms.CharField(max_length=30, required=True, label="Nombre",
         widget=forms.TextInput(
             attrs={
@@ -21,3 +25,11 @@ class StudenFrom(forms.Form):
                 'class': 'form-control',
             }
         ))
+    
+    group = forms.ChoiceField(
+        required=False,
+        label="Grupo",
+        widget=forms.Select(attrs={
+            # 'style': "width: 100%",
+            'class': 'form-control',
+        }))

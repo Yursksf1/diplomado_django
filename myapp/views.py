@@ -154,16 +154,23 @@ def new_group(request):
 
     return render(request, 'new_group.html', {'form': form})
 
+
 def new_student(request):
-    form = StudenFrom()
+    group_choices = Group.objects.all().values_list('id', 'title')
+    form = StudenFrom(group_choices=group_choices)
     if request.method == 'POST':
-        form = StudenFrom(request.POST)
+        form = StudenFrom(request.POST, group_choices=group_choices)
 
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
+            group_choices = form.cleaned_data['group']
 
-            Student(first_name=first_name, last_name=last_name).save()
+            student = Student(first_name=first_name, last_name=last_name)
+            student.save()
+
+            student.group.add(group_choices)
+
             return redirect('students')
 
     return render(request, 'new_student.html', {'form': form})
