@@ -181,7 +181,7 @@ def list_person(request, person):
         'title': person,
         'persons': persons
     }
-    return render(request, 'list_person.html', context)
+    return render(request, 'person/list_person.html', context)
 
 def get_person(request, person, id):
     models = Student
@@ -194,4 +194,4 @@ def get_person(request, person, id):
         'title': person,
         'person': person
     }
-    return render(request, 'person_detail.html', context)
+    return render(request, 'person/person_detail.html', context)
