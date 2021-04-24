@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 
 from .models import Subject, Student, Teacher, Group
-from .forms import GroupForm
+from .forms import GroupForm, StudenFrom
 # Create your views here.
 
 
@@ -153,6 +153,20 @@ def new_group(request):
             return redirect('groups')
 
     return render(request, 'new_group.html', {'form': form})
+
+def new_student(request):
+    form = StudenFrom()
+    if request.method == 'POST':
+        form = StudenFrom(request.POST)
+
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+
+            Student(first_name=first_name, last_name=last_name).save()
+            return redirect('students')
+
+    return render(request, 'new_student.html', {'form': form})
 
 
 def new_group_2(request):
