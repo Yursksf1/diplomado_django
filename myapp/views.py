@@ -143,11 +143,14 @@ def get_student(request, id):
 def new_group(request):
     form = GroupForm()
     if request.method == 'POST':
-        description = request.POST.get('description')
-        title = request.POST.get('title')
+        form = GroupForm(request.POST)
 
-        Group(title=title, description=description).save()
-        return redirect('groups')
+        if form.is_valid():
+            description = form.cleaned_data['description']
+            title = form.cleaned_data['title']
+
+            Group(title=title, description=description).save()
+            return redirect('groups')
 
     return render(request, 'new_group.html', {'form': form})
 
