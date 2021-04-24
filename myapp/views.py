@@ -8,23 +8,22 @@ from .forms import GroupForm, StudenFrom
 
 def home(request):
     context = {}
-    print('estoy llamando al index')
-    return render(request, 'new_group.html', context)
-
-def subject(request):
-    subjects = Subject.objects.all()
-    response = ''
-    for subject in subjects:
-        print(subject.name)
-        response = response + ' ' + subject.name
-
-    print('estoy llamando al index')
-    return HttpResponse(response)
+    return render(request, 'home.html', context)
 
 
-def students(request):
+def list_students(request):
     response = get_students()
     return JsonResponse(response)
+
+
+def list_teachers(request):
+    teachers = Teacher.objects.all().values_list('id', 'first_name')
+    context = {
+        'title': 'Profesores',
+        'teachers': list(teachers)
+    }
+
+    return JsonResponse(context)
 
 
 def get_students():
@@ -58,17 +57,85 @@ def get_students():
     return response
 
 
-def list_students(request):
+def students(request):
     students = Student.objects.all()
     context = {
         'title': 'Estudiantes',
         'students': students
     }
 
-    return render(request, 'list_students.html', context)
+    return render(request, 'student/list_students.html', context)
+
+def get_student(request, id):
+    student = Student.objects.filter(id=id).first()
+    groups = student.group.all()
+    context = {
+        'title': 'student',
+        'groups': groups,
+        'student': student
+    }
+
+    return render(request, 'student/detail_student.html', context)
+
+def new_student(request):
+    group_choices = Group.objects.all().values_list('id', 'title')
+    form = StudenFrom(group_choices=group_choices)
+    if request.method == 'POST':
+        form = StudenFrom(request.POST, group_choices=group_choices)
+
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            group_choices = form.cleaned_data['group']
+
+            student = Student(first_name=first_name, last_name=last_name)
+            student.save()
+
+            student.group.add(group_choices)
+
+            return redirect('students')
+
+    return render(request, 'student/new_student.html', {'form': form})
 
 
-def list_teachers(request):
+
+def groups(request):
+    groups = Group.objects.all()
+    context = {
+        'title': 'Groups',
+        'groups': groups
+    }
+
+    return render(request, 'group/list_groups.html', context)
+
+def get_group(request, id):
+
+    group = Group.objects.filter(id=id).first()
+    students = group.student_set.all()
+    context = {
+        'title': group.title,
+        'group': group,
+        'students': students
+    }
+
+    return render(request, 'group/detail_group.html', context)
+
+def new_group(request):
+    form = GroupForm()
+    if request.method == 'POST':
+        form = GroupForm(request.POST)
+
+        if form.is_valid():
+            description = form.cleaned_data['description']
+            title = form.cleaned_data['title']
+
+            Group(title=title, description=description).save()
+            return redirect('groups')
+
+    return render(request, 'group/new_group.html', {'form': form})
+
+
+def teachers(request):
     teachers = Teacher.objects.all()
     context = {
         'title': 'Profesores',
@@ -90,7 +157,6 @@ def list_person(request, person):
     }
     return render(request, 'list_person.html', context)
 
-
 def get_person(request, person, id):
     models = Student
     if person == 'teacher':
@@ -103,85 +169,3 @@ def get_person(request, person, id):
         'person': person
     }
     return render(request, 'person_detail.html', context)
-
-
-def list_group(request):
-    groups = Group.objects.all()
-    context = {
-        'title': 'Groups',
-        'groups': groups
-    }
-
-    return render(request, 'list_groups.html', context)
-
-
-def get_group(request, id):
-
-    group = Group.objects.filter(id=id).first()
-    students = group.student_set.all()
-    context = {
-        'title': group.title,
-        'group': group,
-        'students': students
-    }
-
-    return render(request, 'detail_group.html', context)
-
-
-def get_student(request, id):
-    student = Student.objects.filter(id=id).first()
-    groups = student.group.all()
-    context = {
-        'title': 'student',
-        'groups': groups,
-        'student': student
-    }
-
-    return render(request, 'detail_student.html', context)
-
-
-def new_group(request):
-    form = GroupForm()
-    if request.method == 'POST':
-        form = GroupForm(request.POST)
-
-        if form.is_valid():
-            description = form.cleaned_data['description']
-            title = form.cleaned_data['title']
-
-            Group(title=title, description=description).save()
-            return redirect('groups')
-
-    return render(request, 'new_group.html', {'form': form})
-
-
-def new_student(request):
-    group_choices = Group.objects.all().values_list('id', 'title')
-    form = StudenFrom(group_choices=group_choices)
-    if request.method == 'POST':
-        form = StudenFrom(request.POST, group_choices=group_choices)
-
-        if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            group_choices = form.cleaned_data['group']
-
-            student = Student(first_name=first_name, last_name=last_name)
-            student.save()
-
-            student.group.add(group_choices)
-
-            return redirect('students')
-
-    return render(request, 'new_student.html', {'form': form})
-
-
-def new_group_2(request):
-    if request.method == 'POST':
-        description = request.POST.get('description')
-        title = request.POST.get('title')
-
-        Group(title=title, description=description).save()
-        return redirect('groups')
-
-    return render(request, 'new_group.html')
