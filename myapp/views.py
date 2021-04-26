@@ -66,6 +66,7 @@ def students(request):
 
     return render(request, 'student/list_students.html', context)
 
+
 def get_student(request, id):
     student = Student.objects.filter(id=id).first()
     groups = student.group.all()
@@ -76,6 +77,7 @@ def get_student(request, id):
     }
 
     return render(request, 'student/detail_student.html', context)
+
 
 def new_student(request):
     group_choices = Group.objects.all().values_list('id', 'title')
@@ -108,6 +110,7 @@ def groups(request):
 
     return render(request, 'group/list_groups.html', context)
 
+
 def get_group(request, id):
 
     group = Group.objects.filter(id=id).first()
@@ -119,6 +122,7 @@ def get_group(request, id):
     }
 
     return render(request, 'group/detail_group.html', context)
+
 
 def new_group(request):
     form = GroupForm()
