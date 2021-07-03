@@ -1,9 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from .models import Subject, Student, Teacher, Group
 
+from .models import Subject, Student, Teacher, Group
+from .forms import GroupForm
 # Create your views here.
 
+
+def home(request):
+    context = {}
+    print('estoy llamando al index')
+    return render(request, 'new_group.html', context)
 
 def subject(request):
     subjects = Subject.objects.all()
@@ -132,3 +138,26 @@ def get_student(request, id):
     }
 
     return render(request, 'detail_student.html', context)
+
+
+def new_group(request):
+    form = GroupForm()
+    if request.method == 'POST':
+        description = request.POST.get('description')
+        title = request.POST.get('title')
+
+        Group(title=title, description=description).save()
+        return redirect('groups')
+
+    return render(request, 'new_group.html', {'form': form})
+
+
+def new_group_2(request):
+    if request.method == 'POST':
+        description = request.POST.get('description')
+        title = request.POST.get('title')
+
+        Group(title=title, description=description).save()
+        return redirect('groups')
+
+    return render(request, 'new_group.html')
